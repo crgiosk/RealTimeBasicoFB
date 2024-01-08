@@ -18,23 +18,21 @@ class FirebaseInstance(context: Context) {
         FirebaseApp.initializeApp(context)
     }
 
-    fun writeOnFirebase() {
+    fun createTask(title: String, description: String) {
         ///ref.setValue("Mi primera escritura ${Random.nextInt(1..10)}")
         //.push crea un nuevo index para el siguiente elemento de la bd en firebase
         val newItem = ref.push()
         newItem.setValue(
-            getGenericTodoTaskItem(Random.nextInt(1..10))
+            Task(
+                title = title,
+                description = description
+            )
         )
     }
 
     fun setListener(listener: ValueEventListener) {
         database.reference.addValueEventListener(listener)
     }
-
-    private fun getGenericTodoTaskItem(number: Int) = Task(
-        title = "Tarea",
-        description = "Numero $number"
-    )
 
     fun removeFromDatabase(reference: String) {
         ref.child(reference).removeValue()
