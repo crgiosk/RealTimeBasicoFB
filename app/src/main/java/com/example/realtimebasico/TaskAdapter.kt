@@ -1,7 +1,6 @@
 package com.example.realtimebasico
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -33,12 +32,13 @@ class TaskAdapter(val onItemSelected: (reference: String) -> Unit) :
     inner class TaskViewHolder(private val view: TaskItemBinding) : ViewHolder(view.root) {
 
         fun bind(referenceTask: String, task: Task) {
-            view.title.text = task.title
-            view.description.text = task.description
-            view.reference.text = referenceTask
-
-            view.root.setOnClickListener {
-                onItemSelected.invoke(referenceTask)
+            view.apply {
+                title.text = task.title
+                description.text = task.description
+                reference.text = referenceTask
+                root.setOnClickListener {
+                    onItemSelected.invoke(referenceTask)
+                }
             }
         }
     }
