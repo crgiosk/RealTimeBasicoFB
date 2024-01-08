@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "939797369321",
+    "project_id": "realtimebasico-cea14",
+    "storage_bucket": "realtimebasico-cea14.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939797369321:android:54f44913809218c5177b78",
+        "android_client_info": {
+          "package_name": "com.example.realtimebasico"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDK5cV_1lA_3helvajqNA_k_r_aU7_rdwE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
