@@ -2,6 +2,7 @@ package com.example.realtimebasico.data
 
 import android.content.Context
 import com.google.firebase.FirebaseApp
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlin.random.Random
@@ -18,5 +19,9 @@ class FirebaseInstance(context: Context) {
     fun writeOnFirebase() {
         val ref = database.reference
         ref.setValue("Mi primera escritura ${Random.nextInt(1..10)}")
+    }
+
+    fun setListener(listener: ValueEventListener) {
+        database.reference.addValueEventListener(listener)
     }
 }
