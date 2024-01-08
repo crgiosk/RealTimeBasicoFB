@@ -1,3 +1,5 @@
 Realt Time basico
 
-Editando data en tiempo real con Firebase
+Proyecto del curso de Firebase de AristiDevs
+
+Firebase para Android con Kotlin: Curso Definitivo desde 0
