@@ -3,6 +3,8 @@ package com.example.realtimebasico
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.realtimebasico.data.FirebaseInstance
 import com.example.realtimebasico.databinding.ActivityMainBinding
 import com.google.firebase.database.DataSnapshot
@@ -15,6 +17,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var firebaseInstance: FirebaseInstance
+
+    private lateinit var taskAdapter: TaskAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -28,9 +32,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupFirebaseListener() {
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val data = snapshot.value
-
-                binding.result.text = (data ?: "Vacio").toString()
+                val data = getTaskFromDataSnapShot(snapshot)
+                taskAdapter.updateList(data)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -41,9 +44,23 @@ class MainActivity : AppCompatActivity() {
         firebaseInstance.setListener(listener)
     }
 
+    private fun getTaskFromDataSnapShot(snapshot: DataSnapshot): List<Pair<String, Task>> {
+        val elements = snapshot.children.map {
+            Pair(it.key!!, it.getValue(Task::class.java)!!)
+        }
+        return elements
+    }
+
     private fun setupUI() {
         binding.btnUpdate.setOnClickListener {
             firebaseInstance.writeOnFirebase()
+        }
+        taskAdapter = TaskAdapter {reference: String ->
+
+        }
+        binding.recyclerViewTask.apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            adapter = taskAdapter
         }
     }
 }
