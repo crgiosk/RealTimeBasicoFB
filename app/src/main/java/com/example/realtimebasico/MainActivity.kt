@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             firebaseInstance.writeOnFirebase()
         }
         taskAdapter = TaskAdapter {reference: String ->
-
+            firebaseInstance.removeFromDatabase(reference)
         }
         binding.recyclerViewTask.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)

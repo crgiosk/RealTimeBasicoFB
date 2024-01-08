@@ -12,6 +12,7 @@ import kotlin.random.nextInt
 class FirebaseInstance(context: Context) {
 
     private val database = Firebase.database
+    val ref = database.reference
 
     init {
         FirebaseApp.initializeApp(context)
@@ -34,4 +35,8 @@ class FirebaseInstance(context: Context) {
         title = "Tarea",
         description = "Numero $number"
     )
+
+    fun removeFromDatabase(reference: String) {
+        ref.child(reference).removeValue()
+    }
 }
